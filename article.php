@@ -11,6 +11,7 @@
  * On va ensuite afficher l'article puis ses commentaires
  */
 require_once('libraries/database.php');
+require_once('libraries/utils.php');
 /**
  * 1. Récupération du param "id" et vérification de celui-ci
  */
@@ -62,8 +63,9 @@ $commentaires = $query->fetchAll();
  * 5. On affiche 
  */
 $pageTitle = $article['title'];
-ob_start();
-require('templates/articles/show.html.php');
-$pageContent = ob_get_clean();
-
-require('templates/layout.html.php');
+render("articles/show", [
+    "pageTitle" => $pageTitle,
+    'article' => $article,
+    'commentaires' => $commentaires,
+    'article_id' => $article_id
+]);

@@ -7,6 +7,7 @@
  * puis on va boucler dessus pour afficher chacun d'entre eux
  */
 require_once('libraries/database.php');
+require_once('libraries/utils.php');
 /**
  * 1. Connexion à la base de données avec PDO
  * Attention, on précise ici deux options :
