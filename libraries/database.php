@@ -25,7 +25,7 @@ function findAllArticles()
     return $articles;
 }
 
-function findArticle(int $id): array
+function findArticle(int $id)
 {
     $pdo = getPdo();
     $query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
@@ -39,6 +39,13 @@ function findArticle(int $id): array
     return $article;
 }
 
+function deleteArticle(int $id): void
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare('DELETE FROM articles WHERE id = :id');
+    $query->execute(['id' => $id]);
+}
+
 function findAllComments(int $id): array
 {
     $pdo = getPdo();
@@ -46,4 +53,20 @@ function findAllComments(int $id): array
     $query->execute(['article_id' => $id]);
     $commentaires = $query->fetchAll();
     return $commentaires;
+}
+
+function findComment(int $id)
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare('SELECT * FROM comments WHERE id = :id');
+    $query->execute(['id' => $id]);
+    $commentaire = $query->fetch();
+    return $commentaire;
+}
+
+function deleteComment(int $id): void
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
+    $query->execute(['id' => $id]);
 }
