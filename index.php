@@ -8,5 +8,5 @@
  */
 require_once("libraries/controllers/Article.php");
 
-$controller = new Article();
+$controller = new Controllers\Article();
 $controller->index();
