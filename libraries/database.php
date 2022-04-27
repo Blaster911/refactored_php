@@ -38,3 +38,12 @@ function findArticle(int $id): array
 
     return $article;
 }
+
+function findAllComments(int $id): array
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
+    $query->execute(['article_id' => $id]);
+    $commentaires = $query->fetchAll();
+    return $commentaires;
+}
