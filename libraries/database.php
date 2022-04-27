@@ -15,7 +15,7 @@ function getPdo(): PDO
  * @return array
  */
 
-function findAllArticle()
+function findAllArticles()
 {
     $pdo = getPdo();
     $resultats = $pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
@@ -23,4 +23,18 @@ function findAllArticle()
     $articles = $resultats->fetchAll();
 
     return $articles;
+}
+
+function findArticle(int $id): array
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare("SELECT * FROM articles WHERE id = :article_id");
+
+    // On exécute la requête en précisant le paramètre :article_id 
+    $query->execute(['article_id' => $id]);
+
+    // On fouille le résultat pour en extraire les données réelles de l'article
+    $article = $query->fetch();
+
+    return $article;
 }

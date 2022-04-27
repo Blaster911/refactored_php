@@ -8,10 +8,11 @@
  */
 require_once('libraries/database.php');
 require_once('libraries/utils.php');
+
 /**
  * 2. Récupération des articles
  */
-$articles = findAllArticle();
+$articles = findAllArticles();
 
 /**
  * 3. Affichage
