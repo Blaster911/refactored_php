@@ -8,3 +8,19 @@ function getPdo(): PDO
 
     return $pdo;
 }
+
+/**
+ *  Retourne la liste des articles classés par date de création
+ * 
+ * @return array
+ */
+
+function findAllArticle()
+{
+    $pdo = getPdo();
+    $resultats = $pdo->query('SELECT * FROM articles ORDER BY created_at DESC');
+    // On fouille le résultat pour en extraire les données réelles
+    $articles = $resultats->fetchAll();
+
+    return $articles;
+}
