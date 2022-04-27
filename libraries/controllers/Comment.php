@@ -2,12 +2,10 @@
 
 namespace Controllers;
 
-require_once('libraries/models/Comment.php');
-require_once('libraries/models/Article.php');
 require_once('libraries/utils.php');
-require_once('libraries/controllers/Controller.php');
+require_once("libraries/autoload.php");
 
-class Comment
+class Comment extends Controller
 {
     protected $modelName = \Models\Comment::class;
 
