@@ -1,16 +1,9 @@
 <?php
 
-require_once('libraries/database.php');
+require_once('libraries/models/Model.php');
 
-class Comment
+class Comment extends Model
 {
-    private $pdo;
-
-    function __construct()
-    {
-        $this->pdo = getPdo();
-    }
-
     public function findAllWithArticle(int $id): array
     {
         $query = $this->pdo->prepare("SELECT * FROM comments WHERE article_id = :article_id");
