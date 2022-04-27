@@ -8,13 +8,19 @@ require_once('libraries/models/Comment.php');
 
 class Article
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new \Models\Article();
+    }
+
     public function index()
     {
-        $model = new \Models\Article();
         /**
          * 2. Récupération des articles
          */
-        $articles = $model->findAll("created_at DESC");
+        $articles = $this->model->findAll("created_at DESC");
 
         /**
          * 3. Affichage
@@ -24,7 +30,6 @@ class Article
     }
     public function show()
     {
-        $articleModel = new \Models\Article();
         $commentModel = new \Models\Comment();
         /**
          * 1. Récupération du param "id" et vérification de celui-ci
@@ -47,7 +52,7 @@ class Article
          * On va ici utiliser une requête préparée car elle inclue une variable qui provient de l'utilisateur : Ne faites
          * jamais confiance à ce connard d'utilisateur ! :D
          */
-        $article = $articleModel->find($article_id);
+        $article = $this->model->find($article_id);
 
         /**
          * 4. Récupération des commentaires de l'article en question
@@ -63,6 +68,31 @@ class Article
     }
     public function delete()
     {
-        // supprimer un article
+        /**
+         * 1. On vérifie que le GET possède bien un paramètre "id" (delete.php?id=202) et que c'est bien un nombre
+         */
+        if (empty($_GET['id']) || !ctype_digit($_GET['id'])) {
+            die("Ho ?! Tu n'as pas précisé l'id de l'article !");
+        }
+
+        $id = $_GET['id'];
+
+        /**
+         * 3. Vérification que l'article existe bel et bien
+         */
+        $article = $this->model->find($id);
+        if (!$article) {
+            die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
+        }
+
+        /**
+         * 4. Réelle suppression de l'article
+         */
+        $this->model->delete($id);
+
+        /**
+         * 5. Redirection vers la page d'accueil
+         */
+        redirect("index.php");
     }
 }
