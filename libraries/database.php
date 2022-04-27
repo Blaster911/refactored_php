@@ -70,3 +70,10 @@ function deleteComment(int $id): void
     $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
     $query->execute(['id' => $id]);
 }
+
+function insertComment(string $author, string $content, string $article_id): void
+{
+    $pdo = getPdo();
+    $query = $pdo->prepare('INSERT INTO comments SET author = :author, content = :content, article_id = :article_id, created_at = NOW()');
+    $query->execute(compact('author', 'content', 'article_id'));
+}
