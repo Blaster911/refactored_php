@@ -2,7 +2,6 @@
 
 namespace Controllers;
 
-require_once('libraries/utils.php');
 require_once("libraries/autoload.php");
 
 class Comment extends Controller
@@ -75,6 +74,6 @@ class Comment extends Controller
         /**
          * 5. Redirection vers l'article en question
          */
-        redirect("article.php?id=" . $article_id);
+        \Http::redirect("article.php?id=" . $article_id);
     }
 }
