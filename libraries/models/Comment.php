@@ -2,8 +2,6 @@
 
 namespace Models;
 
-require_once("libraries/autoload.php");
-
 class Comment extends Model
 {
     protected $table = "comments";

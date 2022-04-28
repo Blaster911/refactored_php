@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-require_once("libraries/autoload.php");
-
 class Comment extends Controller
 {
     protected $modelName = \Models\Comment::class;

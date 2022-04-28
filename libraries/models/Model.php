@@ -2,8 +2,6 @@
 
 namespace Models;
 
-require_once("libraries/autoload.php");
-
 abstract class Model
 {
     protected $pdo;

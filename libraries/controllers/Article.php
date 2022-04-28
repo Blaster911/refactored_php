@@ -2,8 +2,6 @@
 
 namespace Controllers;
 
-require_once("libraries/autoload.php");
-
 class Article extends Controller
 {
     protected $modelName = \Models\Article::class;
